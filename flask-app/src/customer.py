@@ -8,10 +8,10 @@ customer = Blueprint('customer', __name__)
 # These routes are for the customer appsmith 
 
 # Get customer detail for customer with particular userID
-@customer.route('/customer/<userID>', methods=['GET'])
+@customer.route('/customer/<customerID>', methods=['GET'])
 def get_customer(userID):
     cursor = db.get_db().cursor()
-    cursor.execute('select * from customer where customerID = {0}'.format(userID))
+    cursor.execute('select * from customer where customerID = {0}'.format(customerID))
     row_headers = [x[0] for x in cursor.description]
     json_data = []
     theData = cursor.fetchall()
@@ -23,7 +23,7 @@ def get_customer(userID):
     return the_response
  
 # Get customer shopping list data 
-@customer.route('/customer/<customerID>', methods=['GET'])
+@customer.route('/customer/list/<customerID>', methods=['GET'])
 def get_list(userID):
     cursor = db.get_db().cursor()
     cursor.execute('select * from shoppingList where customerID = {0}'.format(customerID))
@@ -38,7 +38,7 @@ def get_list(userID):
     return the_response
 
 # Get customer invoice data 
-@customer.route('/customer/<customerID>', methods=['GET'])
+@customer.route('/customer/invoice/<customerID>', methods=['GET'])
 def get_list(userID):
     cursor = db.get_db().cursor()
     cursor.execute('select * from invoice natural join invoiceItem natural join item natural join shoppingList where customerID = {0}'.format(customerID))
