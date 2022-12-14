@@ -26,7 +26,7 @@ def get_customers():
 @customers.route('/employee/<customerID>', methods=['GET'])
 def get_customerInvoice():
     cursor = db.get_db().cursor()
-    cursor.execute('select firstName, lastName, customerID, phoneNumber, email, totalBill, invoiceDate, billingAddress, storeName from customer natural join invoice natural join store where customerID = {0}'.format(customerID)')
+    cursor.execute('select firstName, lastName, customerID, phoneNumber, email, totalBill, invoiceDate, billingAddress, storeName from customer natural join invoice natural join store where customerID = {0}'.format(customerID))
     row_headers = [x[0] for x in cursor.description]
     json_data = []
     theData = cursor.fetchall()
@@ -62,7 +62,7 @@ def edit_invoice():
 @customers.route('/employee/<employeeID>', methods=['GET'])
 def get_employee():
     cursor = db.get_db().cursor()
-    cursor.execute('select employeeID, startDate, weeklyHours, dateEmployed, firstName, lastName, phoneNo, email, address, dateOfBirth, name from employee natural join store where employeeID = {0}'.format(employeeID)')
+    cursor.execute('select employeeID, startDate, weeklyHours, dateEmployed, firstName, lastName, phoneNo, email, address, dateOfBirth, name from employee natural join store where employeeID = {0}'.format(employeeID))
     row_headers = [x[0] for x in cursor.description]
     json_data = []
     theData = cursor.fetchall()
@@ -79,7 +79,7 @@ def edit_invoice():
   current_app.logger.info(request.form)
   cursor = db.get_db().cursor()
   firstName = request.form['Hours Per Week:']
-  query = f'insert into customer(weeklyHours) values(\"{hours}\" where employeeID = {0}'.format(employeeID))'
+  query = f'insert into customer(weeklyHours) values(\"{hours}\" where employeeID = {0}'.format(employeeID))
   cursor.execute(query)
   db.get_db().commit()
   return "Success"                   
