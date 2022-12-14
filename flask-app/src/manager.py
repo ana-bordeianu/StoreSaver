@@ -26,7 +26,7 @@ def get_managers():
 @manager.route('/manager/<managerID>', methods=['GET'])
 def get_manager_data():
     cursor = db.get_db().cursor()
-    cursor.execute('select totalSales, avgSalesPerDay, productsSoldByRegion, estimatedSales, estimatedArrival, materialsCost from upperManagement natural join inventoryData natural join salesInfo where managerID = {0}'.format(managerID)')
+    cursor.execute('select totalSales, avgSalesPerDay, productsSoldByRegion, estimatedSales, estimatedArrival, materialsCost from upperManagement natural join inventoryData natural join salesInfo where managerID = {0}'.format(managerID))
     row_headers = [x[0] for x in cursor.description]
     json_data = []
     theData = cursor.fetchall()
